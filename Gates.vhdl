@@ -32,10 +32,6 @@ package Gates is
   component HALF_ADDER is
    port (A, B: in std_logic; S, C: out std_logic);
   end component HALF_ADDER;
-  
-  component FULL_ADDER is
-	port (A,B,Cin: in std_logic; Sum, Cout: out std_logic);
-  end component FULL_ADDER;
 
 end package Gates;
 
@@ -130,26 +126,4 @@ begin
    S <= (A xor B);
    C <= (A and B);
 end Equations;
-
-library ieee;
-use ieee.std_logic_1164.all;
-entity FULL_ADDER is
-   port (A, B, Cin: in std_logic; Sum, Cout: out std_logic);
-end entity FULL_ADDER;
-
-architecture struct of FULL_ADDER is
-	component HALF_ADDER is
-		port (A, B: in std_logic;
-				S, C: out std_logic);
-	end component HALF_ADDER;
-	component OR_2 is
-		port (A, B: in std_logic;
-				Y: out std_logic);
-	end component OR_2;
-	signal s1, c1, c2: std_logic;
-begin
-   add1:HALF_ADDER port map(A=>A, B=>B, S=>s1, C=>c1);	
-	add2:HALF_ADDER port map(A=>s1, B=>Cin, S=>Sum, C=>c2);
-	or_inst:OR_2 port map(A=>c1, B=>c2, Y=>Cout);
-end struct;
-    
+  
